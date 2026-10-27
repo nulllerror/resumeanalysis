@@ -113,5 +113,4 @@ final_results = [
 
 final = pd.DataFrame(columns=["name", "email", "phone", "skills", "degree,university"])
 final.loc[len(final)] = final_results
-print(resume)
 print(final)
