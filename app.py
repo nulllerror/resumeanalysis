@@ -63,6 +63,9 @@ def extract_skills(skillstext, skillslist):
 def extract_degrees(text):
     degree_words = [
         "bsc",
+        "b.s",
+        "bs",
+        "b.s.",
         "b.sc",
         "beng",
         "b.eng",
@@ -84,7 +87,7 @@ def extract_degrees(text):
         "hnd",
         "ond",
     ]
-    university_words = ["University", "College", "Polythecnic"]
+    university_words = ["university", "college", "polythecnic"]
     lines = [l.strip() for l in text.split("\n") if l.strip()]
     results = []
     for i, line in enumerate(lines):
@@ -111,6 +114,6 @@ final_results = [
     extract_degrees(resume),
 ]
 
-final = pd.DataFrame(columns=["name", "email", "phone", "skills", "degree,university"])
+final = pd.DataFrame(columns=["name", "email", "phone", "skills", "degree"])
 final.loc[len(final)] = final_results
 print(final)
