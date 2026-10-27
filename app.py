@@ -2,6 +2,8 @@ from pypdf import PdfReader
 import re
 import spacy
 
+nlp = spacy.load("en_core_web_sm")
+
 
 def extract_text(path):
     reader = PdfReader(path)
@@ -21,3 +23,12 @@ def extract_phone(phonetext):
     match = re.search(phone_pattern, phonetext)
     phone = match.group if match else None
     return phone
+
+
+def extract_name(nametext):
+    doc = nlp(nametext)
+    for entity in doc.ents:
+        if entity.label == "PERSON":
+            return entity
+        else:
+            return "No name found! (english)"
