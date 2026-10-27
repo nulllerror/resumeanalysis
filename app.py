@@ -5,6 +5,8 @@ import pandas as pd
 
 nlp = spacy.load("en_core_web_sm")
 
+resume = input("Path to resume?")
+
 
 def load_skills(csvpath):
     df = pd.read_csv(csvpath)
@@ -91,3 +93,17 @@ def extract_degrees(text):
             )
             results.append([line, uni])
     return results
+
+
+final_results = [
+    extract_name(resume),
+    extract_email(resume),
+    extract_phone(resume),
+    extract_skills(resume, "technical_skills.csv"),
+    extract_degrees(resume),
+]
+
+final = pd.DataFrame(
+    columns=["name", "email", "phone", "skills", "degree", "university"]
+)
+final.loc[len(final)] = final_results
