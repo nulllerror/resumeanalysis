@@ -4,7 +4,9 @@ from pypdf import PdfReader
 import pandas as pd
 
 
-resumepath = input("Path to resume?")
+resumepath = input("Path to resume?(Leave blank for the sample resume)")
+if resumepath == "":
+    resumepath = "sampleresume.pdf"
 
 nlp = spacy.load("en_core_web_sm")
 
