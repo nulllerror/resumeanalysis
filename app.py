@@ -9,7 +9,8 @@ nlp = spacy.load("en_core_web_sm")
 def load_skills(csvpath):
     df = pd.read_csv(csvpath)
     skillslist = df["Skill Name"].tolist()
-    return skillslist
+    lowerlist = [item.lower() for item in skillslist]
+    return lowerlist
 
 
 def extract_text(path):
@@ -39,3 +40,13 @@ def extract_name(nametext):
             return entity
         else:
             return "No name found! (english)"
+
+
+def extract_skills(skillstext, skillslist):
+    text = skillstext.lower()
+    found = []
+    for skill in skillslist:
+        pattern = r"(?<![\w+#])" + re.escape(skill) + r"(?![\w+#])"
+        if re.search(pattern, text):
+            found.append(skill)
+    return sorted(found)
