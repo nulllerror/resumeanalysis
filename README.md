@@ -15,5 +15,3 @@ python app.py
 ```
 
 ## known issues
-
--- Names as the first line of the resume fail to be detected sometimes
