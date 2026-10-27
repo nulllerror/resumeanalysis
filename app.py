@@ -1,8 +1,15 @@
 import spacy
 import re
 from pypdf import PdfReader
+import pandas as pd
 
 nlp = spacy.load("en_core_web_sm")
+
+
+def load_skills(csvpath):
+    df = pd.read_csv(csvpath)
+    skillslist = df["Skill Name"].tolist()
+    return skillslist
 
 
 def extract_text(path):
