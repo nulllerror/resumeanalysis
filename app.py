@@ -1,6 +1,6 @@
-from pypdf import PdfReader
-import re
 import spacy
+import re
+from pypdf import PdfReader
 
 nlp = spacy.load("en_core_web_sm")
 
