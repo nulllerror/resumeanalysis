@@ -50,3 +50,44 @@ def extract_skills(skillstext, skillslist):
         if re.search(pattern, text):
             found.append(skill)
     return sorted(found)
+
+
+def extract_degrees(text):
+    degree_words = [
+        "bsc",
+        "b.sc",
+        "beng",
+        "b.eng",
+        "btech",
+        "b.tech",
+        "bachelor",
+        "msc",
+        "m.sc",
+        "meng",
+        "m.eng",
+        "mtech",
+        "m.tech",
+        "master of",
+        "master's",
+        "masters",
+        "mba",
+        "phd",
+        "ph.d",
+        "hnd",
+        "ond",
+    ]
+    university_words = ["University", "College", "Polythecnic"]
+    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    results = []
+    for i, line in enumerate(lines):
+        if any(d in line.lower() for d in degree_words):
+            uni = next(
+                (
+                    l
+                    for l in lines[i : i + 3]
+                    if any(u in l.lower() for u in university_words)
+                ),
+                None,
+            )
+            results.append([line, uni])
+    return results
